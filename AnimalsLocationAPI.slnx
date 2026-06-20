@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="AnimalsLocationAPI/AnimalsLocationAPI.csproj" />
+  <Project Path="Application/Application.csproj" Id="2b74426c-25e9-4702-901d-63958182b67c" />
+  <Project Path="Db/Db.csproj" Id="84d37e3d-50c5-428e-a477-8e2d52598c4e" />
+  <Project Path="Domain/Domain.csproj" Id="90dabd2d-6fd3-4f2a-8a7d-6705de61b3ac" />
+</Solution>
