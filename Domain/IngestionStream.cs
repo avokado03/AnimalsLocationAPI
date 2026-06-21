@@ -2,6 +2,7 @@
 {
     /// <summary>
     /// Логический поток загрузки данных о таксонах.
+    /// Конфигурация потока.
     /// </summary>
     public class IngestionStream
     {
@@ -15,5 +16,9 @@
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+
+        public virtual List<IngestionRun>? IngestionRuns { get; set; }
+        public virtual IngestionWatermark? Watermark { get; set; }
+        public virtual List<RawObservation>? RawObservations { get; set; }     
     }
 }

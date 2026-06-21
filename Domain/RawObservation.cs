@@ -1,7 +1,7 @@
 ﻿namespace AnimalsLocationAPI.Domain
 {
     /// <summary>
-    /// Сырые наблюдения, загруженные из внешних источников, до их обработки и трансформации.
+    /// Сырые наблюдения, загруженные из внешних API.
     /// </summary>
     public class RawObservation
     {
@@ -13,5 +13,8 @@
         public DateTime IngestedAt { get; set; }
         public required string SourceName { get; set; }
         public DateTime LoadDate { get; set; }
+
+        public virtual required IngestionStream Stream { get; set; }
+        public virtual required IngestionRun Run { get; set; }
     }
 }
