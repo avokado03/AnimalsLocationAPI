@@ -1,9 +1,9 @@
-﻿namespace Domain
+﻿namespace AnimalsLocationAPI.Domain
 {
     /// <summary>
     /// Водяные знаки для отслеживания состояния загрузки данных о таксонах.
     /// </summary>
-    public class IngestionWatermarks
+    public class IngestionWatermark
     {
         public Guid StreamId { get; set; }
         public DateTime LastObservedAt { get; set; }

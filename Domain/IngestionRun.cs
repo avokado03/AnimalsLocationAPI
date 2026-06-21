@@ -1,6 +1,6 @@
-﻿namespace Domain
+﻿namespace AnimalsLocationAPI.Domain
 {
-    internal class IngestionRuns
+    internal class IngestionRun
     {
         public Guid Id { get; set; }
         public Guid StreamId  { get; set; }

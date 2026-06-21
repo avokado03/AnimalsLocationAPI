@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using AnimalsLocationAPI.Domain;
 
 namespace Db
 {

@@ -1,9 +1,9 @@
-﻿namespace Domain
+﻿namespace AnimalsLocationAPI.Domain
 {
     /// <summary>
     /// Сырые наблюдения, загруженные из внешних источников, до их обработки и трансформации.
     /// </summary>
-    public class RawObservations
+    public class RawObservation
     {
         public Guid Id { get; set; }
         public Guid StreamId { get; set; }

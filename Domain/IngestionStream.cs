@@ -1,9 +1,9 @@
-﻿namespace Domain
+﻿namespace AnimalsLocationAPI.Domain
 {
     /// <summary>
     /// Логический поток загрузки данных о таксонах.
     /// </summary>
-    public class IngestionStreams
+    public class IngestionStream
     {
         public Guid Id { get; set; }
         public required string StreamKey { get; set; }
