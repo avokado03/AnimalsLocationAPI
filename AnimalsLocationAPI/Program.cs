@@ -6,10 +6,18 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 DIExtensions.AddAnimalsLocationDbContext(builder.Services, connectionString!);
 
 // Add services to the container.
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddControllers();
 
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseHttpsRedirection();
 
