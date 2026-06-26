@@ -1,7 +1,4 @@
 <Solution>
-  <Folder Name="/Solution Items/">
-    <File Path=".editorconfig" />
-  </Folder>
   <Project Path="AnimalLocationAPI.Core/AnimalLocationAPI.Core.csproj" Id="6a7a9005-10ed-4216-9a01-ec25385ccf66" />
   <Project Path="AnimalsLocationAPI/AnimalsLocationAPI.csproj" />
   <Project Path="Db/AnimalsLocationAPI.Db.csproj" Id="84d37e3d-50c5-428e-a477-8e2d52598c4e" />
