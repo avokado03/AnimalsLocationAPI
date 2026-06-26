@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace AnimalsLocationAPI.Db.Migrations
 {
     /// <inheritdoc />
@@ -16,12 +18,12 @@ namespace AnimalsLocationAPI.Db.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    StreamKey = table.Column<string>(type: "text", nullable: false),
-                    CountryCode = table.Column<string>(type: "text", nullable: false),
-                    CountryName = table.Column<string>(type: "text", nullable: false),
-                    TaxonName = table.Column<string>(type: "text", nullable: false),
-                    TaxonId = table.Column<string>(type: "text", nullable: false),
-                    SourceName = table.Column<string>(type: "text", nullable: false),
+                    StreamKey = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    CountryCode = table.Column<string>(type: "character varying(2)", maxLength: 2, nullable: false),
+                    CountryName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    TaxonName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    TaxonSourceId = table.Column<long>(type: "bigint", nullable: false),
+                    SourceName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
@@ -39,7 +41,7 @@ namespace AnimalsLocationAPI.Db.Migrations
                     StreamId = table.Column<Guid>(type: "uuid", nullable: false),
                     StartedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     FinishedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Status = table.Column<string>(type: "text", nullable: false),
+                    Status = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     RecordsFetched = table.Column<int>(type: "integer", nullable: false),
                     RecordsInserted = table.Column<int>(type: "integer", nullable: false),
                     ErrorMessage = table.Column<string>(type: "text", nullable: true),
@@ -89,10 +91,10 @@ namespace AnimalsLocationAPI.Db.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     StreamId = table.Column<Guid>(type: "uuid", nullable: false),
                     RunId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ExternalObservationId = table.Column<string>(type: "text", nullable: false),
+                    ExternalObservationId = table.Column<long>(type: "bigint", nullable: false),
                     RawJson = table.Column<string>(type: "jsonb", nullable: false),
                     IngestedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    SourceName = table.Column<string>(type: "text", nullable: false),
+                    SourceName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     LoadDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
@@ -110,6 +112,19 @@ namespace AnimalsLocationAPI.Db.Migrations
                         principalTable: "IngestionStreams",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "IngestionStreams",
+                columns: new[] { "Id", "CountryCode", "CountryName", "CreatedAt", "IsActive", "SourceName", "StreamKey", "TaxonName", "TaxonSourceId", "UpdatedAt" },
+                values: new object[,]
+                {
+                    { new Guid("96b6f71d-f519-43c5-b540-f8ba5dbd32a5"), "uz", "Uzbekistan", new DateTime(2026, 6, 26, 20, 6, 7, 0, DateTimeKind.Utc), true, "INaturalist", "uz|myriapoda", "Myriapoda", 144128L, new DateTime(2026, 6, 26, 20, 6, 7, 0, DateTimeKind.Utc) },
+                    { new Guid("a5b6f71d-f519-43c5-b540-f8ba5dbd32a4"), "uz", "Uzbekistan", new DateTime(2026, 6, 26, 20, 6, 7, 0, DateTimeKind.Utc), true, "INaturalist", "uz|arachnida", "Arachnida", 47119L, new DateTime(2026, 6, 26, 20, 6, 7, 0, DateTimeKind.Utc) },
+                    { new Guid("b4b6f71d-f519-43c5-b540-f8ba5dbd32a3"), "kg", "Kyrgystan", new DateTime(2026, 6, 26, 20, 6, 7, 0, DateTimeKind.Utc), true, "INaturalist", "kg|myriapoda", "Myriapoda", 144128L, new DateTime(2026, 6, 26, 20, 6, 7, 0, DateTimeKind.Utc) },
+                    { new Guid("c3b6f71d-f519-43c5-b540-f8ba5dbd32a2"), "kg", "Kyrgystan", new DateTime(2026, 6, 26, 20, 6, 7, 0, DateTimeKind.Utc), true, "INaturalist", "kg|arachnida", "Arachnida", 47119L, new DateTime(2026, 6, 26, 20, 6, 7, 0, DateTimeKind.Utc) },
+                    { new Guid("d2b6f71d-f519-43c5-b540-f8ba5dbd32a1"), "kz", "Kazakhstan", new DateTime(2026, 6, 26, 20, 6, 7, 0, DateTimeKind.Utc), true, "INaturalist", "kz|myriapoda", "Myriapoda", 144128L, new DateTime(2026, 6, 26, 20, 6, 7, 0, DateTimeKind.Utc) },
+                    { new Guid("fbc6f71d-f519-43c5-b540-f8ba5dbd32a0"), "kz", "Kazakhstan", new DateTime(2026, 6, 26, 20, 6, 7, 0, DateTimeKind.Utc), true, "INaturalist", "kz|arachnida", "Arachnida", 47119L, new DateTime(2026, 6, 26, 20, 6, 7, 0, DateTimeKind.Utc) }
                 });
 
             migrationBuilder.CreateIndex(

@@ -8,7 +8,7 @@ public class RawObservation
     public Guid Id { get; set; }
     public Guid StreamId { get; set; }
     public Guid RunId { get; set; }
-    public required string ExternalObservationId { get; set; }
+    public required long ExternalObservationId { get; set; }
     public required string RawJson { get; set; }
     public DateTime IngestedAt { get; set; }
     public required string SourceName { get; set; }

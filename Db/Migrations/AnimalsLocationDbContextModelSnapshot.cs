@@ -48,7 +48,8 @@ namespace AnimalsLocationAPI.Db.Migrations
 
                     b.Property<string>("Status")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<Guid>("StreamId")
                         .HasColumnType("uuid");
@@ -68,11 +69,13 @@ namespace AnimalsLocationAPI.Db.Migrations
 
                     b.Property<string>("CountryCode")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(2)
+                        .HasColumnType("character varying(2)");
 
                     b.Property<string>("CountryName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -82,19 +85,21 @@ namespace AnimalsLocationAPI.Db.Migrations
 
                     b.Property<string>("SourceName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("StreamKey")
                         .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("TaxonId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("TaxonName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<long>("TaxonSourceId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -105,6 +110,86 @@ namespace AnimalsLocationAPI.Db.Migrations
                         .IsUnique();
 
                     b.ToTable("IngestionStreams");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("fbc6f71d-f519-43c5-b540-f8ba5dbd32a0"),
+                            CountryCode = "kz",
+                            CountryName = "Kazakhstan",
+                            CreatedAt = new DateTime(2026, 6, 26, 20, 6, 7, 0, DateTimeKind.Utc),
+                            IsActive = true,
+                            SourceName = "INaturalist",
+                            StreamKey = "kz|arachnida",
+                            TaxonName = "Arachnida",
+                            TaxonSourceId = 47119L,
+                            UpdatedAt = new DateTime(2026, 6, 26, 20, 6, 7, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("d2b6f71d-f519-43c5-b540-f8ba5dbd32a1"),
+                            CountryCode = "kz",
+                            CountryName = "Kazakhstan",
+                            CreatedAt = new DateTime(2026, 6, 26, 20, 6, 7, 0, DateTimeKind.Utc),
+                            IsActive = true,
+                            SourceName = "INaturalist",
+                            StreamKey = "kz|myriapoda",
+                            TaxonName = "Myriapoda",
+                            TaxonSourceId = 144128L,
+                            UpdatedAt = new DateTime(2026, 6, 26, 20, 6, 7, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("c3b6f71d-f519-43c5-b540-f8ba5dbd32a2"),
+                            CountryCode = "kg",
+                            CountryName = "Kyrgystan",
+                            CreatedAt = new DateTime(2026, 6, 26, 20, 6, 7, 0, DateTimeKind.Utc),
+                            IsActive = true,
+                            SourceName = "INaturalist",
+                            StreamKey = "kg|arachnida",
+                            TaxonName = "Arachnida",
+                            TaxonSourceId = 47119L,
+                            UpdatedAt = new DateTime(2026, 6, 26, 20, 6, 7, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("b4b6f71d-f519-43c5-b540-f8ba5dbd32a3"),
+                            CountryCode = "kg",
+                            CountryName = "Kyrgystan",
+                            CreatedAt = new DateTime(2026, 6, 26, 20, 6, 7, 0, DateTimeKind.Utc),
+                            IsActive = true,
+                            SourceName = "INaturalist",
+                            StreamKey = "kg|myriapoda",
+                            TaxonName = "Myriapoda",
+                            TaxonSourceId = 144128L,
+                            UpdatedAt = new DateTime(2026, 6, 26, 20, 6, 7, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("a5b6f71d-f519-43c5-b540-f8ba5dbd32a4"),
+                            CountryCode = "uz",
+                            CountryName = "Uzbekistan",
+                            CreatedAt = new DateTime(2026, 6, 26, 20, 6, 7, 0, DateTimeKind.Utc),
+                            IsActive = true,
+                            SourceName = "INaturalist",
+                            StreamKey = "uz|arachnida",
+                            TaxonName = "Arachnida",
+                            TaxonSourceId = 47119L,
+                            UpdatedAt = new DateTime(2026, 6, 26, 20, 6, 7, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = new Guid("96b6f71d-f519-43c5-b540-f8ba5dbd32a5"),
+                            CountryCode = "uz",
+                            CountryName = "Uzbekistan",
+                            CreatedAt = new DateTime(2026, 6, 26, 20, 6, 7, 0, DateTimeKind.Utc),
+                            IsActive = true,
+                            SourceName = "INaturalist",
+                            StreamKey = "uz|myriapoda",
+                            TaxonName = "Myriapoda",
+                            TaxonSourceId = 144128L,
+                            UpdatedAt = new DateTime(2026, 6, 26, 20, 6, 7, 0, DateTimeKind.Utc)
+                        });
                 });
 
             modelBuilder.Entity("AnimalsLocationAPI.Domain.IngestionWatermark", b =>
@@ -139,9 +224,8 @@ namespace AnimalsLocationAPI.Db.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("ExternalObservationId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<long>("ExternalObservationId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("IngestedAt")
                         .HasColumnType("timestamp with time zone");
@@ -158,7 +242,8 @@ namespace AnimalsLocationAPI.Db.Migrations
 
                     b.Property<string>("SourceName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<Guid>("StreamId")
                         .HasColumnType("uuid");

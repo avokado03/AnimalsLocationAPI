@@ -1,4 +1,5 @@
-﻿using AnimalsLocationAPI.Domain;
+﻿using AnimalsLocationAPI.Db.Configurations.Seeds;
+using AnimalsLocationAPI.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -13,14 +14,16 @@ internal class IngestionStreamConfig : IEntityTypeConfiguration<IngestionStream>
     {
         builder.HasKey(x => x.Id);
 
-        builder.Property(x => x.StreamKey).IsRequired();
-        builder.Property(x => x.CountryCode).IsRequired();
-        builder.Property(x => x.CountryName).IsRequired();
-        builder.Property(x => x.TaxonName).IsRequired();
-        builder.Property(x => x.TaxonId).IsRequired();
-        builder.Property(x => x.SourceName).IsRequired();
+        builder.Property(x => x.StreamKey).HasMaxLength(100).IsRequired();
+        builder.Property(x => x.CountryCode).HasMaxLength(2).IsRequired();
+        builder.Property(x => x.CountryName).HasMaxLength(100).IsRequired();
+        builder.Property(x => x.TaxonName).HasMaxLength(100).IsRequired();
+        builder.Property(x => x.TaxonSourceId).IsRequired();
+        builder.Property(x => x.SourceName).HasMaxLength(100).IsRequired();
 
         builder.HasIndex(x => x.StreamKey).IsUnique();
+
+        builder.HasData(StreamSeeds.GetSeeds());
 
         builder.HasMany(x => x.IngestionRuns)
             .WithOne(x => x.Stream)

@@ -16,6 +16,6 @@ internal class RawObservationConfig : IEntityTypeConfiguration<RawObservation>
         builder.Property(x => x.ExternalObservationId).IsRequired();
         builder.Property(x => x.RawJson).IsRequired()
             .HasColumnType("jsonb");
-        builder.Property(x => x.SourceName).IsRequired();
+        builder.Property(x => x.SourceName).HasMaxLength(100).IsRequired();
     }
 }
